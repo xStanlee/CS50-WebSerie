@@ -1,1 +1,3 @@
-CS50-WebSeries
+# Project 1
+
+Web Programming with Python and JavaScript
