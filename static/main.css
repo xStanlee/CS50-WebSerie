@@ -267,9 +267,13 @@ iframe {
   border: 1px solid #e6e6e6;
 }
 
+.rs1-wrap-input100{
+  margin-right: 6%;
+}
+
 .rs1-wrap-input100,
 .rs2-wrap-input100 {
-  width: 50%;
+  width: 47%;
 }
 
 .rs2-wrap-input100 {

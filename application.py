@@ -15,6 +15,7 @@ if not os.getenv("DATABASE_URL"):
 # Configure sqlalchemy to connect my DB
 app.config["SQLALCHEMY_DATABASE_URI"] = os.getenv("DATABASE_URL")
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
+db.init_app(app)
 
 # Configure session to use filesystem
 app.config["SESSION_PERMANENT"] = False
@@ -37,9 +38,21 @@ class Book:
         self.isbn = isbn
         self.review_count = review_count
         self.avarge_score = avarge_score
+class User:
+    def __init__(self, first_name, last_name, username, password, email, phone):
+        self.first_name = first_name
+        self.last_name = last_name
+        self.username = username
+        self.password = password
+        self.email = email
+        self.phone = phone
 
 @app.route("/")
 def index():
     awatar = Book('Awatar', 'JakisDzonson', 1994, 23212321, 42, 4.11)
-    return render_template('login.html')
+    return render_template('login.html', title="Login page")
 
+@app.route("/registration")
+def registration():
+    
+    return render_template('registration.html', title="Registration") 
