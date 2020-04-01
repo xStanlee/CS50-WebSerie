@@ -41,5 +41,5 @@ class Book:
 @app.route("/")
 def index():
     awatar = Book('Awatar', 'JakisDzonson', 1994, 23212321, 42, 4.11)
-    return f'Awatar --- {awatar.title} {awatar.author}  {awatar.year}  '
+    return render_template('login.html')
 
