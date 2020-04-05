@@ -52,6 +52,6 @@ def login():
     awatar = Book('Awatar', 'JakisDzonson', 1994, 23212321, 42, 4.11)
     return render_template('login.html', title="Login page")
 
-@app.route("/registration")
+@app.route("/registration/")
 def registration():
-    return render_template('registration.html')
+    return render_template('registration.html', title="Registration page")
