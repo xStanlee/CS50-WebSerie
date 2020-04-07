@@ -21,3 +21,12 @@ class Users(db.Model):
     last_name = db.Column(db.String, nullable=False)
     phone = db.Column(db.Integer, nullable=False)
     email = db.Column(db.String, nullable=False)
+
+class userPush:
+    def __init__(self, first_name, last_name, username, password, email, phone):
+        self.first_name = first_name
+        self.last_name = last_name
+        self.username = username
+        self.password = password
+        self.email = email
+        self.phone = phone
