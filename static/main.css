@@ -131,6 +131,7 @@ iframe {
 
 /*==================================================================
 [ Text ]*/
+
 .txt1 {
   font-family: Poppins-Regular;
   font-size: 13px;
@@ -223,6 +224,18 @@ iframe {
 
 }
 
+.wrap-login100-r {
+  width: 1170px;
+  overflow: hidden;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+}
+
 /*==================================================================
 [ login more ]*/
 .login100-more {
@@ -287,6 +300,9 @@ iframe {
   display: block;
 }
 
+.mail__text-span {
+  font-size: 10px;
+}
 
 
 /*------------------------------------------------------------------
@@ -365,6 +381,10 @@ input.input100 {
   transform: scale(1);
 }
 
+.input100::placeholder {
+  text-align: center;
+  color: #000000;
+}
 
 
 /*------------------------------------------------------------------
@@ -439,7 +459,7 @@ input.input100 {
 }
 
 .login100-form-btn-lm:hover {
-  background: #00ad5f;
+  background: #333333;
 }
 
 
@@ -552,6 +572,5 @@ input.input100 {
     opacity: 1;
   }
 }
-
 
 

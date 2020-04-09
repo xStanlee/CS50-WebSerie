@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+<div class="limiter">
+    <div class="container-login100">
+        <div class="wrap-login100-r">
+            <form action="{{ url_for('email') }}" method="POST" class="login100-form-r validate-form">
+                <span class="login100-form-title p-b-34">
+                    Forget password?
+                </span>
+                <span class="login100-form-title p-b-8">
+                    put email here!
+                </span>
+                <span class="login100-form-title p-b-80 mail__text-span">
+                    we will send your logs.
+                </span>
+                <div class="wrap-input100 validate-input m-b-22" data-validate="Type password">
+                    <input class="input100" type="email" name="email" placeholder="E-mail" aria-required="true">
+                    <div class="container-login100-form-btn p-t-34">
+                        <input class="login100-form-btn type" type="submit" value="Sent" />
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
