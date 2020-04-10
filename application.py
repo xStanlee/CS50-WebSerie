@@ -21,15 +21,15 @@ app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 db.init_app(app)
 
 # Configure email extension
-app.config['MAIL_SERVER'] = 'smtp.mail.yahoo.com'
-app.config['MAIL_PORT'] = 465
+app.config['MAIL_SERVER'] = 'smtp.mail.yahoo.com.pl'
+app.config['MAIL_PORT'] = 587
 app.config['MAIL_USE_TLS'] = True
 app.config['MAIL_USE_SSL'] = False
 #app.config['MAIL_DEBUG'] = True
 app.config['MAIL_USERNAME'] = 'patryk_stachura@yahoo.com'
 app.config['MAIL_PASSWORD'] = 'stalmax11'
-app.config['MAIL_DEFAULT_SENDER'] = 'testbox@yahoo.com'
-app.config['MAIL_MAX_EMAILS'] = None
+app.config['MAIL_DEFAULT_SENDER'] = 'patryk_stachura@yahoo.com'
+app.config['MAIL_MAX_EMAILS'] = 100
 #app.config['MAIL_SUPPRESS_SEND'] = False
 app.config['MAIL_ASCII_ATTACHMENTS'] = False
 
@@ -57,18 +57,16 @@ def empty():
 
 @app.route("/login", methods=['POST', 'GET'])
 def login():
-    usersName = Users.query.all()
     if request.method == "POST":
+        usersName = Users.query.all()
         user = request.form["username"]
         password = request.form["pass"]
-        usersName = Users.query.all()
-        for single in usersName:
-            if single.password == password and single.username == user:
+        for user in usersName:
+            if user.password == password and user.username == user:
                 return redirect(url_for('test', usr=user, psw=password))
                 break
             else:
                 return render_template('login_miss.html', title="Something went wrong...",  checkLogs="Username or password incorrected")
-        #return redirect(url_for('test', usr=user, psw=password))
     else:
         return render_template('login.html', title="Login page")
 
@@ -119,7 +117,7 @@ def email():
 
 @app.route('/send')
 def send():
-    msg = Message('Test message Siema Wiktor', recipients=['cogab30135@smlmail.com'])
+    msg = Message('Test message: Koronawirus_precz2020_july', recipients=['cogab30135@smlmail.com', 'stachura.patryk@yahoo.com'])
     mail.send(msg)
 
     return 'Message has been sent'
