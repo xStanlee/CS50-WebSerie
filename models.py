@@ -22,3 +22,6 @@ class Users(db.Model):
     last_name = db.Column(db.String, nullable=False)
     phone = db.Column(db.Integer, nullable=False)
     email = db.Column(db.String, unique=True, nullable=False)
+
+    def last_index(self):
+        return len(self)-1

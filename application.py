@@ -21,14 +21,14 @@ app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 db.init_app(app)
 
 # Configure email extension
-app.config['MAIL_SERVER'] = 'smtp.mail.yahoo.com.pl'
-app.config['MAIL_PORT'] = 587
-app.config['MAIL_USE_TLS'] = True
-app.config['MAIL_USE_SSL'] = False
+app.config['MAIL_SERVER'] = 'smtp.gmail.com'
+app.config['MAIL_PORT'] = 465
+app.config['MAIL_USE_TLS'] = False
+app.config['MAIL_USE_SSL'] = True
 #app.config['MAIL_DEBUG'] = True
-app.config['MAIL_USERNAME'] = 'patryk_stachura@yahoo.com'
+app.config['MAIL_USERNAME'] = 'stanthecompany@gmail.com'
 app.config['MAIL_PASSWORD'] = 'stalmax11'
-app.config['MAIL_DEFAULT_SENDER'] = 'patryk_stachura@yahoo.com'
+app.config['MAIL_DEFAULT_SENDER'] = 'patryk_stachura@hotmail.com'
 app.config['MAIL_MAX_EMAILS'] = 100
 #app.config['MAIL_SUPPRESS_SEND'] = False
 app.config['MAIL_ASCII_ATTACHMENTS'] = False
@@ -57,16 +57,25 @@ def empty():
 
 @app.route("/login", methods=['POST', 'GET'])
 def login():
+    DB_user = Users.query.all()
     if request.method == "POST":
-        usersName = Users.query.all()
-        user = request.form["username"]
-        password = request.form["pass"]
-        for user in usersName:
-            if user.password == password and user.username == user:
-                return redirect(url_for('test', usr=user, psw=password))
-                break
+        DB_user = Users.query.all()
+        un = request.form["username"]
+        pw = request.form["pass"]
+        count = 0
+        for user in DB_user:
+            if user.username == un and user.password == pw:
+                return redirect(url_for('test', usr=un, psw=pw)) #MainPage
             else:
-                return render_template('login_miss.html', title="Something went wrong...",  checkLogs="Username or password incorrected")
+                count += 1
+                if count < len(DB_user):
+                    continue
+                else:
+                    return  render_template('login_miss.html', title="Something went wrong...",  checkLogs="Username or password incorrected")
+                    break
+
+
+
     else:
         return render_template('login.html', title="Login page")
 
@@ -109,18 +118,34 @@ def registration():
 
 @app.route('/forgot', methods=['POST','GET'])
 def email():
-    if request.method == 'GET':
-        return render_template('email.html')
+    if request.method == 'POST':
+        DB_user = Users.query.all()
+        email = request.form['email']
+        count = 0
+        for userEmail in DB_user:
+            count += 1
+            if email == userEmail.email:
+                msg = Message(f'We received a request to return your logs. Your username is {userEmail.username} and your password is {userEmail.password}. Try to keep that in mind', recipients=['stanthecompany@gmail.com', f'{userEmail.email}'])
+                mail.send(msg)
+                return render_template('sent.html', message="We have recived your logs! Check your email.")
+            else:
+                if count < len(DB_user):
+                    continue
+                else:
+                    return render_template('sent.html', message=f"Email like {email} doesn\'t exist in our Application")
 
     else:
-        return "Post looklikeit!"
+        return render_template('email.html')
+
+    return 'Message has been sent'
+if __name__ == '__main__':
+    app.run()
 
 @app.route('/send')
 def send():
-    msg = Message('Test message: Koronawirus_precz2020_july', recipients=['cogab30135@smlmail.com', 'stachura.patryk@yahoo.com'])
+    msg = Message('Test message: Koronawirus_precz2020_july', recipients=['kogopo4822@govdep5012.com', 'stachura.patryk@yahoo.com'])
     mail.send(msg)
 
     return 'Message has been sent'
-
 if __name__ == '__main__':
     app.run()
