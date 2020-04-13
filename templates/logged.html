@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block content %}
+<nav class="nav">
+    <div class="nav__logo">
+        <img src="/static/logo_logged.png" alt="Logo" class="nav__logo-img">
+    </div>
+    <form action="#" class="nav__search">
+        <input type="text" class="nav__search-input" placeholder="Search books...">
+        <button class="nav__search-btn"></button>
+    </form>
+    <div class="nav__logout">
+        <span class="nav__logout-username">{{ username }}</span>
+    </div>
+</nav>
+<div class="content">
+    <ul class="item_holder">
+        <li class="item_single">1</li>
+        <li class="item_single">2</li>
+        <li class="item_single">3</li>
+        <li class="item_single">4</li>
+        <li class="item_single">5</li>
+        <li class="item_single">6</li>
+    </ul>
+</div>
+{% endblock %}
