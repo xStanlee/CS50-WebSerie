@@ -573,57 +573,83 @@ input.input100 {
   }
 }
 /************************************/
-/*         LOGGED                   */
+
+ /*         LOGGED               */
+
+/************************************/
 
 .nav{
   height: 8rem;
   width: 100vw;
   display: flex;
-  background-image: linear-gradient(rgba(255, 225, 190, 0.729), rgba(201, 135, 33, 0.729)), url(/static/bg-logged.jpg);
+  background-image: linear-gradient(rgba(28, 214, 131, 0.729), rgba(0, 173, 95, 0.729)), url(/static/bg-logged.jpg);
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
   justify-content: space-between;
   align-items: center;
 }
-.nav:hover,
-.nav:active,{
-  border-bottom: solid 3px black;
+
+.nav__logo{
+  display: grid;
+  grid-template-columns: 1fr max-content 1fr;
+  grid-column-gap: 1rem;
+  align-items: center;
 }
 
 .nav__logo-img{
-  margin-left: 2rem;
   width: 3rem;
   height: 3rem;
   cursor: pointer;
   background-color: transparent;
 }
+.nav__logo::before,
+.nav__logo::after{
+  display: block;
+  content: "LOGO";
+  color: currentColor;
+}
+
+.nav__search{
+  width: max-content;
+  height: max-content;
+  margin-left: 10vw;
+  margin-right: auto;
+}
+
 .nav__search-input{
   border-radius: 50px;
   text-align: center;
   width: 15rem;
   height: 2.5rem;
   will-change: transform;
-  background-color: #ffe1beba;
-  color: #975d05;
+  background-color: currentColor;;
+  color: #fff;
   transition: all .7s;
 }
 .nav__search-input:focus,
 .nav_search-input:active{
   transform: scale(1.08);
-  color: #975d05;
+  color: #00ad5f;
   cursor: pointer;
   background-color: #ffe1beba;
 }
-.nav__logout-username{
-  margin-right: 4rem;
-  cursor: pointer;
+
+.nav__logout{
+  display: flex;
+  justify-content: center;
 }
-.nav__logout-username::after{
+.nav__logout-username{
+  margin-right: 1.5rem;
+  cursor: pointer;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: currentColor;;
+}
+.nav__logout-username::before{
   display: block;
-  content: "\f29f";
-  top: 0;
-  left: 0;
+  position: absolute;
+  content: "\203A";
 }
 /*.content{
   display: grid;
