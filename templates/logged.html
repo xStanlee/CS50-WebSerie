@@ -9,9 +9,23 @@
         <input type="text" class="nav__search-input" placeholder="Search books...">
         <button class="nav__search-btn"></button>
     </form>
-    <div class="nav__logout">
-        <span class="nav__logout-username">{{ username }}</span>
-    </div>
+    <nav class="nav__logout">
+        <div class="nav__logout-icon-box">
+            <svg class="nav__logout-icon">
+                <use xlink:href="/static/sprite.svg#icon-user"></use>
+            </svg>
+        </div>
+        <div class="nav__logout-icon-box">
+            <svg class="nav__logout-icon">
+                <use xlink:href="/static/sprite.svg#icon-bubble2"></use>
+            </svg>
+        </div>
+        <div class="nav__logout-user">
+            <svg class="nav__logout-icon">
+                <use xlink:href="/static/sprite.svg#icon-exit"></use>
+            </svg>
+        </div>
+    </nav>
 </nav>
 <div class="content">
     <ul class="item_holder">

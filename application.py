@@ -1,11 +1,41 @@
 import os
 import requests
 
-from flask import session, render_template, request, redirect, url_for
+from flask import (
+    Flask,
+    session,
+    render_template,
+    request,
+    redirect,
+    url_for
+)
+from flask_mail import (
+    Mail,
+    Message
+)
+from wtforms import (
+    StringField,
+    PasswordField,
+    BooleanField
+)
+from wtforms.validators import (
+    InputRequired,
+    Email,
+    Length
+)
 from flask_session import Session
-from flask_mail import Mail, Message
+from flask_wtf import FlaskForm
+
+
+from werkzeug.security import (
+    generate_password_hash,
+    check_password_hash
+)
+from sqlalchemy.orm import (
+    scoped_session,
+    sessionmaker
+)
 from sqlalchemy import create_engine
-from sqlalchemy.orm import scoped_session, sessionmaker
 
 from models import *
 
@@ -25,7 +55,7 @@ app.config['MAIL_SERVER'] = 'smtp.gmail.com'
 app.config['MAIL_PORT'] = 465
 app.config['MAIL_USE_TLS'] = False
 app.config['MAIL_USE_SSL'] = True
-#app.config['MAIL_DEBUG'] = True
+#app.config['MAIL_DEBUG'] = True cause default is taken from flask_debug env_var
 app.config['MAIL_USERNAME'] = 'stanthecompany@gmail.com'
 app.config['MAIL_PASSWORD'] = 'stalmax11'
 app.config['MAIL_DEFAULT_SENDER'] = 'patryk_stachura@hotmail.com'
@@ -53,8 +83,15 @@ db = scoped_session(sessionmaker(bind=engine))
 
 @app.route("/")
 def empty():
-    return redirect(url_for('login'))
+    if "user" in session:
+        return redirect(url_for('test'))
+    else:
+        return redirect(url_for('login'))
+##############################################
 
+##########     LOGIN ROUTE          ##########
+
+##############################################
 @app.route("/login", methods=['POST', 'GET'])
 def login():
     DB_user = Users.query.all()
@@ -62,10 +99,12 @@ def login():
         DB_user = Users.query.all()
         un = request.form["username"]
         pw = request.form["pass"]
+        session["user"] = un
+        session["password"] = pw
         count = 0
         for user in DB_user:
             if user.username == un and user.password == pw:
-                return redirect(url_for('test', usr=un, psw=pw)) #MainPage
+                return redirect(url_for('test')) #MainPage
             else:
                 count += 1
                 if count < len(DB_user):
@@ -73,30 +112,42 @@ def login():
                 else:
                     return  render_template('login_miss.html', title="Something went wrong...",  checkLogs="Username or password incorrected")
                     break
-
-
-
     else:
         return render_template('login.html', title="Login page")
 
-@app.route("/test/<usr>/<psw>")
-def test(usr, psw):
-    return f"USER : {usr}, PASSWORD: {psw}"
+##############################################
+
+##########     LOGGED ROUTE         ##########
+
+##############################################
+
+@app.route("/test/")
+@app.route("/test")
+def test():
+    if "user" in session and "password" in session:
+        usr = session["user"]
+        return render_template('logged.html', username=usr)
+    else:
+        return redirect(url_for('login'))
+
+##############################################
+
+##########   REGISTRATION ROUTE     ##########
+
+##############################################
 
 @app.route("/registration/", methods=['POST', 'GET'])
 @app.route("/registration", methods=['POST', 'GET'])
 def registration():
     if request.method == "POST":
-
         username = request.form["username"]
         password = request.form["pass"]
+        hashed_password = generate_password_hash(password, method='pbkdf2:sha256')
+        #password = hashed_password
         first_name = request.form["first-name"]
         last_name = request.form["last-name"]
         email = request.form["email"]
         phone = request.form["phone"]
-
-#//////////////////////////
-#/////////
         #Select all tables for chacking purpose
         users = Users.query.all()
 
@@ -109,13 +160,19 @@ def registration():
 
         db.execute(ins, {'username': username, 'password': password, 'first_name': first_name, 'last_name': last_name, 'phone': phone, 'email': email})
         db.commit()
-        return redirect(url_for('test', usr=username, psw=password))
+        return redirect(url_for('test', usr=username, psw=hashed_password))
 
 
 
     else:
         return render_template('registration.html', title="Registration page", Register="Registration")
 
+
+##############################################
+
+##########     EMAIL SENDBACK PW    ##########
+
+##############################################
 @app.route('/forgot', methods=['POST','GET'])
 def email():
     if request.method == 'POST':
@@ -136,15 +193,6 @@ def email():
 
     else:
         return render_template('email.html')
-
-    return 'Message has been sent'
-if __name__ == '__main__':
-    app.run()
-
-@app.route('/send')
-def send():
-    msg = Message('Test message: Koronawirus_precz2020_july', recipients=['kogopo4822@govdep5012.com', 'stachura.patryk@yahoo.com'])
-    mail.send(msg)
 
     return 'Message has been sent'
 if __name__ == '__main__':

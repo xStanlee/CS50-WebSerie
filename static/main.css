@@ -623,33 +623,41 @@ input.input100 {
   width: 15rem;
   height: 2.5rem;
   will-change: transform;
-  background-color: currentColor;;
-  color: #fff;
+  background-color: #acffdaba;
+  color: #666666;
   transition: all .7s;
+  box-shadow: 4px -3px 25px -4px rgba(0,0,0,0.65);
 }
 .nav__search-input:focus,
 .nav_search-input:active{
   transform: scale(1.08);
-  color: #00ad5f;
+  color: #666666;
   cursor: pointer;
-  background-color: #ffe1beba;
+  background-color: #acffdaba;
 }
 
 .nav__logout{
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
+  align-items: center;
 }
+
+.nav__logout-icon-box:not(:last-child){
+  margin-right: 2rem;
+}
+
+.nav__logout-icon{
+  width: 4rem;
+  height: 4rem;
+  fill: orangered;
+}
+
 .nav__logout-username{
-  margin-right: 1.5rem;
+  margin-right: 5vw;
   cursor: pointer;
   text-transform: uppercase;
   font-weight: 600;
-  color: currentColor;;
-}
-.nav__logout-username::before{
-  display: block;
-  position: absolute;
-  content: "\203A";
+  color: currentColor;
 }
 /*.content{
   display: grid;
