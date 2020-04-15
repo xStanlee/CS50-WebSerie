@@ -25,3 +25,12 @@ class Users(db.Model):
 
     def last_index(self):
         return len(self)-1
+
+class Books(db.Model):
+    #def __init__(self, username, password, first_name, last_name, phone, email):
+    __tablename__ = "books"
+    id = db.Column(db.Integer, primary_key=True)
+    isbn = db.Column(db.String, unique=True, nullable=False)
+    title = db.Column(db.String, nullable=False)
+    author = db.Column(db.String, nullable=False)
+    year = db.Column(db.Integer, nullable=False)

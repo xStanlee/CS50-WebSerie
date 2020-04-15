@@ -5,8 +5,8 @@
     <div class="nav__logo">
         <img src="/static/logo_logged.png" alt="Logo" class="nav__logo-img">
     </div>
-    <form action="#" class="nav__search">
-        <input type="text" class="nav__search-input" placeholder="Search books...">
+    <form action="{{ url_for('search') }}" method="POST" class="nav__search">
+        <input type="text" name="bookname" class="nav__search-input" placeholder="Search books...">
         <button class="nav__search-btn"></button>
     </form>
     <nav class="nav__logout">
@@ -14,22 +14,94 @@
             <svg class="nav__logout-icon">
                 <use xlink:href="/static/sprite.svg#icon-user"></use>
             </svg>
+            <span class="nav__logout-span">{{ username }}</span>
         </div>
         <div class="nav__logout-icon-box">
             <svg class="nav__logout-icon">
                 <use xlink:href="/static/sprite.svg#icon-bubble2"></use>
             </svg>
         </div>
-        <div class="nav__logout-user">
+        <div class="nav__logout-icon-box">
+            <a href="{{ url_for('logout') }}">
             <svg class="nav__logout-icon">
                 <use xlink:href="/static/sprite.svg#icon-exit"></use>
             </svg>
+            </a>
         </div>
     </nav>
 </nav>
 <div class="content">
-    <ul class="item_holder">
-        <li class="item_single">1</li>
+    <ul class="item__holder">
+        <li class="item__single">
+            <div class="card">
+                <img src="/static/card/book.jpg" alt="Name_of_book" class="card__img">
+                <svg class="card__like">
+                    <use xlink:href="/static/card/spritecard.svg#icon-heart"></use>
+                </svg>
+                <h5 class="card__title">{{ title }}</h5>
+                <div class="card__author">
+                    <svg>
+                        <use xlink:href="/static/card/spritecard.svg#icon-user"></use>
+                    </svg>
+                    <p>{{ author }}</p>
+                </div>
+                <div class="card__isbn">
+                    <svg>
+                        <use xlink:href="/static/card/spritecard.svg#icon-profile"></use>
+                    </svg>
+                    <p>{{ isbn }}</p>
+                </div>
+                <div class="card__year">
+                    <svg>
+                        <use xlink:href="/static/card/spritecard.svg#icon-calendar"></use>
+                    </svg>
+                    <p>{{ year }}<sup>year</sup></p>
+                </div>
+                <div class="card__score">
+                    <svg>
+                        <use xlink:href="/static/card/spritecard.svg#icon-star-full"></use>
+                    </svg>
+                    <p>{{score}}</p>
+                </div>
+                <button class="card__btn">book review</button>
+            </div>
+        </li>
+
+        <li class="item__single">
+            <div class="card">
+                <img src="/static/card/book.jpg" alt="Name_of_book" class="card__img">
+                <svg class="card__like">
+                    <use xlink:href="/static/card/spritecard.svg#icon-heart"></use>
+                </svg>
+                <h5 class="card__title">{{ title }}</h5>
+                <div class="card__author">
+                    <svg>
+                        <use xlink:href="/static/card/spritecard.svg#icon-user"></use>
+                    </svg>
+                    <p>{{ author }}</p>
+                </div>
+                <div class="card__isbn">
+                    <svg>
+                        <use xlink:href="/static/card/spritecard.svg#icon-profile"></use>
+                    </svg>
+                    <p>{{ isbn }}</p>
+                </div>
+                <div class="card__year">
+                    <svg>
+                        <use xlink:href="/static/card/spritecard.svg#icon-calendar"></use>
+                    </svg>
+                    <p>{{ year }}<sup>year</sup></p>
+                </div>
+                <div class="card__score">
+                    <svg>
+                        <use xlink:href="/static/card/spritecard.svg#icon-star-full"></use>
+                    </svg>
+                    <p>{{score}}</p>
+                </div>
+                <button class="card__btn">book review</button>
+            </div>
+        </li>
+        <!----                BREAK POINT BEITACH              -->
         <li class="item_single">2</li>
         <li class="item_single">3</li>
         <li class="item_single">4</li>

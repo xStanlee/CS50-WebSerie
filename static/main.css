@@ -582,13 +582,19 @@ input.input100 {
   height: 8rem;
   width: 100vw;
   display: flex;
-  background-image: linear-gradient(rgba(28, 214, 131, 0.729), rgba(0, 173, 95, 0.729)), url(/static/bg-logged.jpg);
+  background-image: linear-gradient(rgba(102, 62, 3, 0.729), rgba(45, 27, 1, 0.729)), url(/static/bg-logged.jpg);
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
   justify-content: space-between;
   align-items: center;
 }
+
+/************************************/
+
+ /*              LOGO               */
+
+/************************************/
 
 .nav__logo{
   display: grid;
@@ -607,9 +613,13 @@ input.input100 {
 .nav__logo::after{
   display: block;
   content: "LOGO";
-  color: currentColor;
+  color: #ffb752ba;
 }
+/************************************/
 
+/*         Search_inpt              */
+
+/************************************/
 .nav__search{
   width: max-content;
   height: max-content;
@@ -623,7 +633,7 @@ input.input100 {
   width: 15rem;
   height: 2.5rem;
   will-change: transform;
-  background-color: #acffdaba;
+  background-color: #ffb752ba;
   color: #666666;
   transition: all .7s;
   box-shadow: 4px -3px 25px -4px rgba(0,0,0,0.65);
@@ -631,27 +641,48 @@ input.input100 {
 .nav__search-input:focus,
 .nav_search-input:active{
   transform: scale(1.08);
-  color: #666666;
+  color: #333333;
   cursor: pointer;
-  background-color: #acffdaba;
+  background-color: #ffb752ba;
 }
+/************************************/
 
+/*           RIGHT NAV              */
+
+/************************************/
 .nav__logout{
   display: flex;
   justify-content: space-between;
   align-items: center;
+  transition: all .5 ease-in;
 }
-
+.nav__logout > *:hover{
+  transform: scale(1.13);
+}
+.nav__logout-icon-box{
+  position: relative;
+  cursor: pointer;
+}
 .nav__logout-icon-box:not(:last-child){
   margin-right: 2rem;
 }
-
+.nav__logout-icon-box:last-child{
+  margin-right: 1rem;
+}
 .nav__logout-icon{
-  width: 4rem;
-  height: 4rem;
-  fill: orangered;
+  width: 2.5rem;
+  height: 2.5rem;
+  fill: #ffb752ba;
 }
 
+.nav__logout-span{
+  display: block;
+  position: absolute;
+  top: 2.5rem;
+  left: -1.5rem;
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  color:#ffb752ba;
+}
 .nav__logout-username{
   margin-right: 5vw;
   cursor: pointer;
@@ -659,10 +690,136 @@ input.input100 {
   font-weight: 600;
   color: currentColor;
 }
-/*.content{
+.content{
+  background-image: linear-gradient(rgba(255, 183, 82, 0.729), rgba(172, 122, 51, 0.729)), url(/static/bg_container.jpg);
+
   display: grid;
-  grid-column-start: auto;
-  grid-column-end: ;
-  grid-template-columns: ;
-  grid-template-rows: ;
-} */
+  grid-template-rows: 1fr 20vh;
+  grid-template-columns: [start-gap] 10rem [start-end center-start] repeat(4, [col-start] minmax(min-content, 24rem) [col-end]) [center-end] minmax(10rem, 1fr);
+}
+.content > *{
+  padding: 4rem;
+  font-size: 3rem;
+}
+/************************************/
+
+ /*           CARD-STYLE           */
+
+/************************************/
+
+.item__holder{
+  grid-column: center-start / center-end;
+  margin: 8rem 0;
+  box-shadow: 5px 5px 20px -5px rgba(0, 0, 0, 0.9);
+
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
+  grid-gap: 6rem;
+}
+
+.item__single{
+  box-shadow: 5px 5px 20px -5px rgba(0, 0, 0, 0.9);
+}
+.card{
+  background-color: #e6e6e6;
+  overflow: hidden;
+  border-radius: .4rem;
+
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-row-gap: 3.5rem;
+}
+
+.card__img{
+  background-color: #6b4c20;
+  opacity: 0.87;
+
+  display: block;
+  width: 100%;
+  grid-row: 1/2;
+  grid-column: 1/-1;
+  z-index: 1;
+
+  will-change: opacity transform;
+  transform: scale(1.15);
+  transition: opacity .4s  cubic-bezier(.17,.67,.83,.67),
+            transform .4s  cubic-bezier(.17,.67,.83,.67);
+}
+
+.card__img:hover{
+  opacity: 1;
+  transform: scale(1.03);
+}
+
+.card__like{
+  fill: #ffb752;
+  height: 2.5rem;
+  width: 2.5rem;
+  margin: 1.5rem 1rem 0 0;
+  z-index: 2;
+
+  grid-row: 1/2;
+  grid-column: 2/2;
+  justify-self: end;
+}
+
+.card__title{
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  font-size: 1.6rem;
+  text-align: center;
+  padding: 1.25rem;
+  background-color: #ac7a33;
+  font-weight: 400;
+  z-index: 1;
+  color: #fff;
+
+  width: 80%;
+  height: 16%;
+  grid-row: 1/2;
+  grid-column: 1/-1;
+  justify-self: center;
+  align-self: end;
+  z-index: 3;
+  transform: translateY(60%);
+}
+
+.card__btn{
+  grid-column: 1/-1;
+  box-shadow: 5px 5px 20px -5px rgba(0,0,0,0.75);
+  background-color: #ac7a33;
+  color: #fff;
+  font-size: 1.6rem;
+  text-transform: uppercase;
+  will-change: background-color;
+
+  transition: all .3s;
+}
+.card__btn:hover{
+  background-color: #7c5622
+}
+.card__author,
+.card__isbn{
+  margin-top: 2.5rem;
+}
+
+.card__author,
+.card__isbn,
+.card__year,
+.card__score{
+  font-size: 1.5rem;
+  margin-left: 2rem;
+
+  display: flex;
+  align-items: center;
+}
+
+.card__author,
+.card__isbn,
+.card__year,
+.card__score > svg {
+  fill: #ac7a33;
+  height: 2rem;
+  width: 2rem;
+  margin-right: 1.5rem;
+}
+
