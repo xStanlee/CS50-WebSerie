@@ -767,7 +767,8 @@ input.input100 {
   font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
   font-size: 1.6rem;
   text-align: center;
-  padding: 1.25rem;
+  padding: 1vw;
+  padding-bottom: 1.5vh;
   background-color: #ac7a33;
   font-weight: 400;
   z-index: 1;
@@ -813,9 +814,9 @@ input.input100 {
   align-items: center;
 }
 
-.card__author,
-.card__isbn,
-.card__year,
+.card__author > svg,
+.card__isbn > svg,
+.card__year > svg,
 .card__score > svg {
   fill: #ac7a33;
   height: 2rem;
@@ -823,3 +824,6 @@ input.input100 {
   margin-right: 1.5rem;
 }
 
+.not__found{
+  margin: 20vh auto;
+}

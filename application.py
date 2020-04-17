@@ -1,4 +1,5 @@
 import os
+import random
 import requests
 
 from flask import (
@@ -114,7 +115,6 @@ def login():
                     break
     else:
         return render_template('login.html', title="Login page")
-
 ##############################################
 
 ##########     LOGGED ROUTE         ##########
@@ -129,6 +129,20 @@ def test():
         return render_template('logged.html', username=usr)
     else:
         return redirect(url_for('login'))
+##############################################
+
+##########        LOG OUT           ##########
+
+##############################################
+@app.route("/logout")
+def logout():
+    if "user" in session:
+        name = session['user']
+        session.pop('user', None)
+        session.pop('password', None)
+        return render_template('sent.html', message=f"Come back soon... {name} we will miss You.")
+    else:
+        return redirect(url_for('test'))
 
 ##############################################
 
@@ -195,5 +209,50 @@ def email():
         return render_template('email.html')
 
     return 'Message has been sent'
+
+@app.route('/test', methods=['POST','GET'])
+def search():
+    if request.method == "POST":
+        bookname = request.form["bookname"]
+        books = Books.query.filter(Books.title.like(f"%{bookname}%")).all()
+        author = Books.query.filter(Books.author.like(f"{bookname}%")).all()
+        isbn = Books.query.filter(Books.isbn.like(f"{bookname}")).all()
+        value = []
+        ### CHECK FOR AUTHORS ###
+        if len(author) <= 0:
+            del author
+        else:
+            value = author
+        ### CHECK FOR IDs' ###
+        if len(isbn) <= 0:
+            del isbn
+        else:
+            value = isbn
+        ### CHECK FOR BOOKS ###
+        if len(books) <= 0:
+            del books
+        else:
+            value = books
+        score = random.randint(1, 50)/10
+        notFound = "Sorry we couldn\'t found any matches..."
+        ##############################
+         # fetch from diffrent api's#
+               ## add to app ##
+        ##############################
+        if not value:
+            return render_template('logged.html', notFound=notFound)
+        else:
+            return render_template('logged.html', books=value, score=score)
+    else:
+        return redirect(url_for('test'))
+##############################################
+
+    ##########     BOOK PAGE    ##########
+
+##############################################
+@app.route(f'')
+def bookpage():
+
+    return render_template ("bookpage.html", isbn=, title=, score=,author= )
 if __name__ == '__main__':
     app.run()
