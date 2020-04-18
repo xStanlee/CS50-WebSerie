@@ -1,0 +1,84 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="bg-video">
+  <video class="bg-video__content" autoplay muted loop>
+    <source src="/static/video.mp4" type="video/mp4">
+    <source src="/static/video.webm" type="video/webm">
+      Your browser is not supported!
+    </video>
+</div>
+<section class="section-page">
+    <section class="book">
+      <div class="text-center margin-bottom-8r">
+        <h2 class="heading-secondary card__btn-cheat card__btn">
+          TITLE : {{ title }} </br>
+        </h2>
+      <img src="/static/card/book_on_bookpage.png" alt="{{ title }}" class="book__img">
+
+        <div class="book_details">
+          <div class="book_detail-item">
+            <svg>
+              <use xlink:href="/static/card/spritecard.svg#icon-user"></use>
+            </svg>
+            <h5 class="">
+              {{ author }} </br>
+            </h5>
+          </div>
+          <div class="book_detail-item">
+            <svg>
+              <use xlink:href="/static/card/spritecard.svg#icon-profile"></use>
+            </svg>
+            <h5 class="">
+              ID:{{ isbn }} </br>
+            </h5>
+          </div>
+          <div class="book_detail-item">
+            <svg>
+              <use xlink:href="/static/card/spritecard.svg#icon-calendar"></use>
+            </svg>
+            <h5 class="">
+              {{ year }} <sup>r.</sup></br>
+            </h5>
+          </div>
+        </div>
+    </div>
+    </section>
+    <div class="section__textarea">
+    </div>
+    <textarea class="section__textarea-textarea" placeholder="Let us know what you think!">asdasd</textarea>
+
+
+
+      <section class="messages">
+        <div class="messages__item">
+          <figure class="messages__shape">
+              <img src="/static/card/person_1.jpg" alt="Person-back" class="messages__img">
+              <figcaption class="messages__caption">Ted Terry</figcaption>
+          </figure>
+          <div class="messages__text">
+            <h3>I had the best week ever with my family</h3>
+            <p>
+                It was popularised in the 1960s with the release of some bullshit for test...
+            </p>
+          </div>
+        </div>
+
+        <div class="messages__item">
+          <figure class="messages__shape">
+              <img src="/static/card/person_2.jpg" alt="Person-back" class="messages__img">
+              <figcaption class="messages__caption">Patryk Stachura</figcaption>
+          </figure>
+          <div class="messages__text">
+            <h3>Klasa sama w sobie</h3>
+            <p>
+                Kurcze nawet nie macie pojęcia jak jestem z siebie zadowolony, cacy ksiązka
+            </p>
+          </div>
+        </div>
+      </section>
+
+
+      <!--####################### GENERATE REVIEW ####################################-->
+  </section>
+{% endblock %}

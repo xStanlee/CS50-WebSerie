@@ -143,7 +143,7 @@ iframe {
   font-family: Poppins-Regular;
   font-size: 13px;
   line-height: 1.4;
-  color: #00ad5f;
+  color: #7e4900;
 }
 
 .txt2-lm {
@@ -157,7 +157,7 @@ iframe {
   font-family: Poppins-Regular;
   font-size: 15px;
   line-height: 1.4;
-  color: #00ad5f;
+  color: #7e4900;
   text-transform: uppercase;
 }
 
@@ -171,7 +171,7 @@ iframe {
 
 .txt3:hover,
 .txt2:hover {
-  color:#00ad5f;
+  color:#999999;
 }
 
 /*==================================================================
@@ -353,7 +353,7 @@ input.input100 {
   top: -1px;
   left: -1px;
   pointer-events: none;
-  border: 1px solid #00ad5f;
+  border: 1px solid #7e4900;
 
   visibility: hidden;
   opacity: 0;
@@ -412,7 +412,7 @@ input.input100 {
   width: 100%;
   height: 50px;
   border-radius: 3px;
-  background: #00ad5f;
+  background: #7e4900;
 
   font-family: Montserrat-Bold;
   font-size: 12px;
@@ -581,11 +581,14 @@ input.input100 {
 .nav{
   height: 8rem;
   width: 100vw;
-  display: flex;
+
   background-image: linear-gradient(rgba(102, 62, 3, 0.729), rgba(45, 27, 1, 0.729)), url(/static/bg-logged.jpg);
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
+  font-family: Poppins-Regular, Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+
+  display: flex;
   justify-content: space-between;
   align-items: center;
 }
@@ -651,6 +654,8 @@ input.input100 {
 
 /************************************/
 .nav__logout{
+  font-family: Poppins-Regular, Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -680,7 +685,7 @@ input.input100 {
   position: absolute;
   top: 2.5rem;
   left: -1.5rem;
-  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  font-family: inherit;
   color:#ffb752ba;
 }
 .nav__logout-username{
@@ -711,6 +716,7 @@ input.input100 {
   grid-column: center-start / center-end;
   margin: 8rem 0;
   box-shadow: 5px 5px 20px -5px rgba(0, 0, 0, 0.9);
+  font-family: Poppins-Regular, Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
 
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
@@ -719,11 +725,13 @@ input.input100 {
 
 .item__single{
   box-shadow: 5px 5px 20px -5px rgba(0, 0, 0, 0.9);
+  font-family: inherit;
 }
 .card{
   background-color: #e6e6e6;
   overflow: hidden;
   border-radius: .4rem;
+  font-family: inherit;
 
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -826,4 +834,171 @@ input.input100 {
 
 .not__found{
   margin: 20vh auto;
+}
+
+/************************************/
+
+  /*           BOOK-PAGE          */
+
+/************************************/
+.bg-video {
+  background-color: #7e4900;
+  padding: 0 3rem;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  z-index: -1;
+  opacity: .1;
+  overflow: hidden;
+}
+.bg-video__content{
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}
+
+.section-page{
+
+  font-family: Poppins-Regular, Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  display: grid;
+
+  grid-template-rows: repeat(4, [row-start] minmax(10rem, 1fr) [row-end]);
+  grid-template-columns: repeat(4, [col-start] minmax(10rem, 1fr) [col-end]);
+}
+.section-page > *{
+  font-size: 2.5rem;
+}
+
+.book{
+  background-color: transparent;
+  margin-top: 10vh;
+
+  grid-column: col-start 1/col-end 2;
+  grid-row: 1/ -1;
+}
+.book__img{
+  opacity: .7;
+
+  padding: 5rem 0 3rem 2rem;
+  z-index: 1;
+}
+
+.card__btn-cheat{
+  max-width: 60%;
+  margin: 0 auto;
+  opacity: .8;
+}
+
+.book_details{
+  padding: 3rem;
+  width: 25vw;
+  height: 30vh;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-direction: column;
+
+  clip-path: polygon(0 0, 100% 28%, 75% 100%, 0 56%);
+  background-color: #7e4900;
+  opacity: .7;
+
+}
+.book_details > p {
+  font-size: 1.2rem;
+  z-index: 3;
+  opacity: 1;
+  color: #000;
+  font-weight: 300;
+}
+.book_detail-item{
+  font-size: inherit;
+  text-transform: uppercase;
+}
+.book_detail-item > svg {
+  width: 2rem;
+  height: 2rem;
+  opacity: .7;
+}
+.book_details > sup{
+  transform: translateY(-10px);
+}
+.book_details > *:nth-child(2){
+  color: #fff;
+  fill: #fff;
+  align-self: center;
+}
+.book_details > *:last-child{
+  color: #000;
+  font-size: 1rem;
+  align-self: flex-end;
+  margin-right: 13%;
+}
+
+.section__textarea{
+  position: relative;
+  z-index: 10;
+  grid-column: col-start 2 / -1;
+  grid-row: 1 / -1;
+
+  background-color: #7e4900;
+  opacity: .7;
+  clip-path: polygon(0 75.4%, 100% 0, 100% 49%, 74% 100%);
+
+  display: flex;
+}
+.section__textarea-textarea{
+  position: absolute;
+  z-index: 100;
+  width: 30%;
+  height: 15%;
+  padding: .8rem;
+  font-size: 1.2rem;
+  color: #000;
+  margin-left: 10vw;
+  margin-bottom: 2vh;
+
+  box-shadow: 4px -3px 25px -4px rgba(0,0,0,0.65);
+  border-radius: .5rem;
+
+
+  align-self: flex-end;
+  justify-self: center;
+}
+
+.messages{
+  grid-column: col-end 2 / -1;
+  grid-row: row-start 1 / row-end 3;
+}
+.messages:first-child{
+  margin-top: 3rem;
+}
+.messages__item{
+  z-index: 11;
+  width: 60%;
+  max-height: 33.33%;
+  margin: 1rem auto;
+  border-radius: .3rem;
+  padding: 3rem;
+  padding-left: 5rem;
+  font-size: 1.3rem;
+  color: #000;
+
+  box-shadow: 0 3rem 6rem rgba(0, 0, 0, 0.15);
+  background-color: rgba(255, 255, 255, 0.2);
+
+  transform: skewX(-12deg);
+}
+
+.messages__shape{
+  width: 7rem;
+  height: 7rem;
+  transform: skewX(12deg);
+  clip-path: polygon(0 23%, 100% 23%, 100% 75%, 75% 75%, 75% 100%, 50% 75%, 0% 75%);
+  background-size: cover;
+}
+.messages__img{
+  height: 100%;
 }

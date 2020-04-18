@@ -68,7 +68,9 @@
                     </svg>
                     <p>{{score}}</p>
                 </div>
-                <button href="#" class="card__btn">book review</button>
+                <form  class="card__btn" action="{{ url_for('bookpage', isbn=book.isbn, author=book.author, title=book.title, year=book.year) }}" method="POST">
+                    <input type="submit" value="book review" class="card__btn" />
+                </form>
             </div>
         </li>
         {% endfor %}
