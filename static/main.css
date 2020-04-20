@@ -907,7 +907,7 @@ input.input100 {
 
 }
 .book_details > p {
-  font-size: 1.2rem;
+  font-size: 1rem;
   z-index: 3;
   opacity: 1;
   color: #000;
@@ -921,9 +921,6 @@ input.input100 {
   width: 2rem;
   height: 2rem;
   opacity: .7;
-}
-.book_details > sup{
-  transform: translateY(-10px);
 }
 .book_details > *:nth-child(2){
   color: #fff;
@@ -949,9 +946,19 @@ input.input100 {
 
   display: flex;
 }
+.section__textarea-item{
+  width: inherit;
+  height: inherit;
+  display: flex;
+  flex-direction: row;
+  margin: 0 auto 8vh auto;
+  justify-content: flex-end;
+  align-items: flex-end;
+  z-index: 20;
+}
 .section__textarea-textarea{
   position: absolute;
-  z-index: 100;
+  z-index: 21;
   width: 30%;
   height: 15%;
   padding: .8rem;
@@ -962,10 +969,12 @@ input.input100 {
 
   box-shadow: 4px -3px 25px -4px rgba(0,0,0,0.65);
   border-radius: .5rem;
-
-
+}
+.section__textarea-input{
+  text-transform: uppercase;
+  justify-self: flex-end;
   align-self: flex-end;
-  justify-self: center;
+  z-index: 40;
 }
 
 .messages{
@@ -979,9 +988,9 @@ input.input100 {
   z-index: 11;
   width: 60%;
   max-height: 33.33%;
-  margin: 1rem auto;
+  margin: 1.4rem auto;
   border-radius: .3rem;
-  padding: 3rem;
+  padding: 1rem;
   padding-left: 5rem;
   font-size: 1.3rem;
   color: #000;
@@ -1001,4 +1010,6 @@ input.input100 {
 }
 .messages__img{
   height: 100%;
+  width: 100%;
+  filter: grayscale(100%);
 }
