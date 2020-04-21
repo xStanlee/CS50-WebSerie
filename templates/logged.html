@@ -68,7 +68,7 @@
                     </svg>
                     <p>{{score}}</p>
                 </div>
-                <form  class="card__btn" action="{{ url_for('bookpage', isbn=book.isbn, author=book.author, title=book.title, year=book.year) }}" method="POST">
+                <form  class="card__btn" action="{{ url_for('bookpage',book_id=book.id ,isbn=book.isbn, author=book.author, title=book.title, year=book.year) }}" method="GET">
                     <input type="submit" value="book review" class="card__btn" />
                 </form>
             </div>

@@ -12,7 +12,7 @@
     <section class="book">
       <div class="text-center margin-bottom-8r">
         <h2 class="heading-secondary card__btn-cheat card__btn">
-          TITLE : {{ title }} </br>
+          TITLE : {{ title }} + {{ book_id }} </br>
         </h2>
       <img src="/static/card/book_on_bookpage.png" alt="{{ title }}" class="book__img">
 
@@ -46,7 +46,7 @@
     </section>
 
     <div class="section__textarea">
-      <form method="POST" class="section__textarea-item">
+      <form action="{{ url_for('comment', user_id=user_id, book_id=book_id) }}"method="POST" class="section__textarea-item">
         <textarea name="comment" class="section__textarea-textarea" placeholder="Let us know what you think!" maxlength="50"></textarea>
         <input class="login100-form-btn section__textarea-input" type="submit" value="Enter"/>
       </form>
@@ -59,7 +59,7 @@
               <figcaption class="messages__caption">{{ user}}</figcaption>
           </figure>
           <div class="messages__text">
-            <h3># {{ user }}</h3>
+            <h3>#{{ user_id }} {{ user }}</h3>
             <p>
                 It was popularised in the 1960s with the release of some bullshit for test...
             </p>

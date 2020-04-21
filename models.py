@@ -28,6 +28,9 @@ class Users(db.Model):
     def last_index(self):
         return len(self)-1
 
+    def __repr__(self):
+        return '<Users %r>' % self.username
+
 class Books(db.Model):
 
     __tablename__ = "books"
@@ -36,6 +39,9 @@ class Books(db.Model):
     title = db.Column(db.String, nullable=False)
     author = db.Column(db.String, nullable=False)
     year = db.Column(db.Integer, nullable=False)
+
+    def __repr__(self):
+        return '<Books %r>' % self.title
 
 class Messages(db.Model):
 
@@ -48,3 +54,6 @@ class Messages(db.Model):
     book_id = db.Column(db.Integer, db.ForeignKey('books.id'), nullable=False)
     book = db.relationship('Books', backref=db.backref('messages', lazy=True))
     pub_date = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
+
+    def __repr__(self):
+        return '<Messages %r>' % self.message
