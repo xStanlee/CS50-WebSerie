@@ -2,6 +2,15 @@ from datetime import datetime
 
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy.orm import relationship
+from sqlalchemy.ext.declarative import declarative_base
+
+from sqlalchemy import (
+    Table,
+    Column,
+    Integer,
+    ForeignKey
+)
 
 db = SQLAlchemy()
 
@@ -24,7 +33,9 @@ class Users(db.Model):
     last_name = db.Column(db.String, nullable=False)
     phone = db.Column(db.Integer, nullable=False)
     email = db.Column(db.String, unique=True, nullable=False)
-
+    ### RELATION ONE TO MANY ###
+    parent_user = relationship("Messages", back_populates="user")
+    ############################
     def last_index(self):
         return len(self)-1
 
@@ -39,7 +50,9 @@ class Books(db.Model):
     title = db.Column(db.String, nullable=False)
     author = db.Column(db.String, nullable=False)
     year = db.Column(db.Integer, nullable=False)
-
+     ### RELATION ONE TO MANY ###
+    parent_book = relationship("Messages", back_populates="book")
+    ############################
     def __repr__(self):
         return '<Books %r>' % self.title
 
@@ -50,9 +63,9 @@ class Messages(db.Model):
     name = db.Column(db.String(50))
     message = db.Column(db.Text, nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
-    user = db.relationship('Users', backref=db.backref('messages', lazy=True))
+    user = db.relationship('Users', back_populates="parent_user")
     book_id = db.Column(db.Integer, db.ForeignKey('books.id'), nullable=False)
-    book = db.relationship('Books', backref=db.backref('messages', lazy=True))
+    book = db.relationship('Books', back_populates="parent_book")
     pub_date = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
 
     def __repr__(self):

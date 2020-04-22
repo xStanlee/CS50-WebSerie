@@ -12,7 +12,7 @@
     <section class="book">
       <div class="text-center margin-bottom-8r">
         <h2 class="heading-secondary card__btn-cheat card__btn">
-          TITLE : {{ title }} + {{ book_id }} </br>
+          TITLE : {{ title }}  </br>
         </h2>
       <img src="/static/card/book_on_bookpage.png" alt="{{ title }}" class="book__img">
 
@@ -46,7 +46,7 @@
     </section>
 
     <div class="section__textarea">
-      <form action="{{ url_for('comment', user_id=user_id, book_id=book_id) }}"method="POST" class="section__textarea-item">
+      <form action="{{ url_for('comment', user_id=user_id, book_id=book_id, isbn=isbn, author=author, title=title, year=year) }}"method="POST" class="section__textarea-item">
         <textarea name="comment" class="section__textarea-textarea" placeholder="Let us know what you think!" maxlength="50"></textarea>
         <input class="login100-form-btn section__textarea-input" type="submit" value="Enter"/>
       </form>
@@ -55,42 +55,35 @@
       <section class="messages">
         <div class="messages__item">
           <figure class="messages__shape">
-              <img src="/static/card/person_1.jpg" alt="Person-back" class="messages__img">
-              <figcaption class="messages__caption">{{ user}}</figcaption>
-          </figure>
-          <div class="messages__text">
-            <h3>#{{ user_id }} {{ user }}</h3>
-            <p>
-                It was popularised in the 1960s with the release of some bullshit for test...
-            </p>
-          </div>
-        </div>
-
-        <div class="messages__item">
-          <figure class="messages__shape">
               <img src="/static/card/person_2.jpg" alt="Person-back" class="messages__img">
               <figcaption class="messages__caption">Patryk Stachura</figcaption>
           </figure>
           <div class="messages__text">
-            <h3>Klasa sama w sobie</h3>
+            <h3>This comment is hardcoded!</h3>
             <p>
-                Kurcze nawet nie macie pojęcia jak jestem z siebie zadowolony, cacy ksiązka
+                It is created hardcoded comment just for testing purpouse.
             </p>
           </div>
         </div>
 
-        <div class="messages__item">
-          <figure class="messages__shape">
-              <img src="/static/card/person_3.jpeg" alt="Person-back" class="messages__img">
-              <figcaption class="messages__caption">Adrew Flinston</figcaption>
-          </figure>
-          <div class="messages__text">
-            <h3>Abababa</h3>
-            <p>
-                Hababatha, tabahaba nabada badda... Dad'a bada ada't badapada
-            </p>
-          </div>
-        </div>
+        <ul class="messages__ul">
+          {% for comment in comments %}
+            <li class="messages__li">
+              <div class="messages__item">
+                <figure class="messages__shape">
+                    <img src="/static/card/person_1.jpg" alt="Person-back" class="messages__img">
+                    <figcaption class="messages__caption">{{ comment.name }}</figcaption>
+                </figure>
+                <div class="messages__text">
+                  <h3>#{{ comment.user_id }} {{ comment.name }}</h3>
+                  <p>
+                     {{ comment.message }}
+                  </p>
+                </div>
+              </div>
+            </li>
+          {% endfor %}
+        </ul>
       </section>
 
 

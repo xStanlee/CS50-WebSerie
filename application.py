@@ -74,7 +74,6 @@ Session(app)
  #Set up database & scope_session for each user
 engine = create_engine(os.getenv("DATABASE_URL"))
 db = scoped_session(sessionmaker(bind=engine))
-
 #//////////////////////////
 #/// FOR LATER USAGE
 
@@ -105,6 +104,7 @@ def login():
         count = 0
         for user in DB_user:
             if user.username == un and user.password == pw:
+                session["user_id"] = user.id
                 return redirect(url_for('test')) #MainPage
             else:
                 count += 1
@@ -120,7 +120,6 @@ def login():
 ##########     LOGGED ROUTE         ##########
 
 ##############################################
-
 @app.route("/test/")
 @app.route("/test")
 def test():
@@ -143,13 +142,11 @@ def logout():
         return render_template('sent.html', message=f"Come back soon... {name} we will miss You.")
     else:
         return redirect(url_for('test'))
-
 ##############################################
 
 ##########   REGISTRATION ROUTE     ##########
 
 ##############################################
-
 @app.route("/registration/", methods=['POST', 'GET'])
 @app.route("/registration", methods=['POST', 'GET'])
 def registration():
@@ -180,8 +177,6 @@ def registration():
 
     else:
         return render_template('registration.html', title="Registration page", Register="Registration")
-
-
 ##############################################
 
 ##########     EMAIL SENDBACK PW    ##########
@@ -209,7 +204,11 @@ def email():
         return render_template('email.html')
 
     return 'Message has been sent'
+##############################################
 
+  ##########     SEARCH BOOKS    ##########
+
+##############################################
 @app.route('/test', methods=['POST','GET'])
 def search():
     if request.method == "POST":
@@ -250,9 +249,34 @@ def search():
     ##########     BOOK PAGE    ##########
 
 ##############################################
-@app.route(f'')
-def bookpage():
+@app.route('/book/<book_id>/<isbn>/<author>/<title>/<year>', methods=["GET", "POST"])
+def bookpage(book_id, isbn, author, title, year):
+    usr = session["user"]
+    usr_id = session["user_id"]
 
-    return render_template ("bookpage.html", isbn=, title=, score=,author= )
+    comments_id = int(book_id)
+    comments = Messages.query.filter(Messages.book_id == (f"{comments_id}")).all()
+    comments_len = len(comments)
+    comments = Messages.query.filter(Messages.book_id == (f"{comments_id}")).offset(comments_len-2).limit(2)
+
+    if request.method == "GET":
+        return render_template("page.html", user_id=usr_id, book_id=book_id ,isbn=isbn, author=author, title=title, year=year, user=usr, comments=comments)
+    elif request.method == "POST":
+        return redirect(url_for('comment' ,user_id=user_id,book_id=book_id, isbn=isbn, author=author, title=title, year=year))
+    else:
+        return f"ERROR OBJECT NOT FOUND {comments_check}"
+##############################################
+
+    ##########    SEND MESSAGE    ##########
+
+#############################################
+@app.route('/post/<int:book_id>/<isbn>/<author>/<title>/<year>/<int:user_id>/', methods=["POST"])
+def comment(user_id, book_id, isbn, author, title, year):
+    name = session["user"]
+    comment = request.form["comment"]
+    message = Messages(name=name, message=comment, user_id=user_id, book_id=book_id)
+    db.add(message)
+    db.commit()
+    return redirect(url_for('bookpage', book_id=book_id, isbn=isbn, author=author, title=title, year=year))
 if __name__ == '__main__':
     app.run()

@@ -984,6 +984,9 @@ input.input100 {
 .messages:first-child{
   margin-top: 3rem;
 }
+.messages__li{
+  list-style-type: none;
+}
 .messages__item{
   z-index: 11;
   width: 60%;
