@@ -9,7 +9,9 @@ from sqlalchemy import (
     Table,
     Column,
     Integer,
-    ForeignKey
+    ForeignKey,
+    and_,
+    or_
 )
 
 db = SQLAlchemy()
@@ -70,3 +72,5 @@ class Messages(db.Model):
 
     def __repr__(self):
         return '<Messages %r>' % self.message
+
+

@@ -217,6 +217,7 @@ def search():
         author = Books.query.filter(Books.author.like(f"{bookname}%")).all()
         isbn = Books.query.filter(Books.isbn.like(f"{bookname}")).all()
         value = []
+        scores = []
         ### CHECK FOR AUTHORS ###
         if len(author) <= 0:
             del author
@@ -232,7 +233,9 @@ def search():
             del books
         else:
             value = books
-        score = random.randint(1, 50)/10
+
+        #res = requests.get("https://www.goodreads.com/book/review_counts.json", params={"key": "cIAWnULXTSoqvTIKqOMdTQ", "isbn": f"{}"})
+
         notFound = "Sorry we couldn\'t found any matches..."
         ##############################
          # fetch from diffrent api's#
@@ -253,7 +256,7 @@ def search():
 def bookpage(book_id, isbn, author, title, year):
     usr = session["user"]
     usr_id = session["user_id"]
-
+    ### CHANGE IT TO FUNC IN FUTURE ###
     comments_id = int(book_id)
     comments = Messages.query.filter(Messages.book_id == (f"{comments_id}")).all()
     comments_len = len(comments)
@@ -274,9 +277,18 @@ def bookpage(book_id, isbn, author, title, year):
 def comment(user_id, book_id, isbn, author, title, year):
     name = session["user"]
     comment = request.form["comment"]
-    message = Messages(name=name, message=comment, user_id=user_id, book_id=book_id)
-    db.add(message)
-    db.commit()
-    return redirect(url_for('bookpage', book_id=book_id, isbn=isbn, author=author, title=title, year=year))
+    ### CHANGE IT TO FUNC IN FUTURE ###
+    #comments = Messages.query.filter_by(book_id == (f"{book_id}"),
+                                        #user_id == (f"{user_id}"))
+    comments = Messages.query.filter(and_(Messages.book_id == f"{book_id}",
+                                    Messages.user_id == f"{user_id}")).all()
+    if len(comments) == 0:
+        message = Messages(name=name, message=comment, user_id=user_id, book_id=book_id)
+        db.add(message)
+        db.commit()
+        return redirect(url_for('bookpage', book_id=book_id ,isbn=isbn, author=author, title=title, year=year))
+    else:
+        return "It wont work because"#redirect(url_for('bookpage', book_id=book_id ,isbn=isbn, author=author, title=title, year=year))
+
 if __name__ == '__main__':
     app.run()

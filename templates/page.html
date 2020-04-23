@@ -47,7 +47,7 @@
 
     <div class="section__textarea">
       <form action="{{ url_for('comment', user_id=user_id, book_id=book_id, isbn=isbn, author=author, title=title, year=year) }}"method="POST" class="section__textarea-item">
-        <textarea name="comment" class="section__textarea-textarea" placeholder="Let us know what you think!" maxlength="50"></textarea>
+        <textarea name="comment" class="section__textarea-textarea" placeholder="Let us know what you think!" maxlength="120"></textarea>
         <input class="login100-form-btn section__textarea-input" type="submit" value="Enter"/>
       </form>
     </div>
