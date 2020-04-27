@@ -8,7 +8,8 @@ from flask import (
     render_template,
     request,
     redirect,
-    url_for
+    url_for,
+    jsonify
 )
 from flask_mail import (
     Mail,
@@ -37,6 +38,13 @@ from sqlalchemy.orm import (
     sessionmaker
 )
 from sqlalchemy import create_engine
+
+from flask_json import (
+    FlaskJSON,
+    JsonError,
+    json_response,
+    as_json
+)
 
 from models import *
 
@@ -233,18 +241,46 @@ def search():
             del books
         else:
             value = books
+                            ##################################################
+                        ####            PROBLEM WITH API's PARAM              ###
+                        ####                THAT's WHY CONCAT                 ###
+                            ##################################################
+        isbns=[]
+        isbns_ComaSep = ''
+        for each in value:
+            isbns.append(each.isbn) ## not working ##
+            isbns_ComaSep = isbns_ComaSep + each.isbn + ','
 
-        #res = requests.get("https://www.goodreads.com/book/review_counts.json", params={"key": "cIAWnULXTSoqvTIKqOMdTQ", "isbn": f"{}"})
+        ############################
+        key = "xNVUyD6sffGiUlSclKPAOw"
+        secret_key = "QuqGn84nOZOLL6O8Av4LmotDAKkod9m6jdrJ0q3oY2Y"
+        res = requests.get("https://www.goodreads.com/book/review_counts.json", params={"key": f"{key}", "isbns": f"{isbns_ComaSep}"})
+        if res.status_code != 200:
+            raise Exception("ERROR: API request unsuccessful.")
+        respons = res.json()
+        #################################
 
-        notFound = "Sorry we couldn\'t found any matches..."
-        ##############################
-         # fetch from diffrent api's#
-               ## add to app ##
-        ##############################
+        books = respons['books']
+        average_rating_list = []
+        review_count_list = []
+
+        for each in books:
+            average_rating_list.append(each['average_rating'])
+            review_count_list.append(each['reviews_count'])
+        ##################################
+        ## enrichment our object with  ###
+        #### values from outsided API's ##
+        ###################################
+        counter = 0
+        for val in value:
+            val.score = average_rating_list[counter]
+            val.count = review_count_list[counter]
+            counter += 1
+
         if not value:
             return render_template('logged.html', notFound=notFound)
         else:
-            return render_template('logged.html', books=value, score=score)
+            return render_template('logged.html', books=value, score=average_rating_list)
     else:
         return redirect(url_for('test'))
 ##############################################
@@ -260,7 +296,8 @@ def bookpage(book_id, isbn, author, title, year):
     comments_id = int(book_id)
     comments = Messages.query.filter(Messages.book_id == (f"{comments_id}")).all()
     comments_len = len(comments)
-    comments = Messages.query.filter(Messages.book_id == (f"{comments_id}")).offset(comments_len-2).limit(2)
+    if comments_len >= 2:
+        comments = Messages.query.filter(Messages.book_id == (f"{comments_id}")).offset(comments_len-2).limit(2)
 
     if request.method == "GET":
         return render_template("page.html", user_id=usr_id, book_id=book_id ,isbn=isbn, author=author, title=title, year=year, user=usr, comments=comments)
@@ -270,7 +307,7 @@ def bookpage(book_id, isbn, author, title, year):
         return f"ERROR OBJECT NOT FOUND {comments_check}"
 ##############################################
 
-    ##########    SEND MESSAGE    ##########
+##########    COMMENTARY SECTION   ##########
 
 #############################################
 @app.route('/post/<int:book_id>/<isbn>/<author>/<title>/<year>/<int:user_id>/', methods=["POST"])
@@ -278,8 +315,6 @@ def comment(user_id, book_id, isbn, author, title, year):
     name = session["user"]
     comment = request.form["comment"]
     ### CHANGE IT TO FUNC IN FUTURE ###
-    #comments = Messages.query.filter_by(book_id == (f"{book_id}"),
-                                        #user_id == (f"{user_id}"))
     comments = Messages.query.filter(and_(Messages.book_id == f"{book_id}",
                                     Messages.user_id == f"{user_id}")).all()
     if len(comments) == 0:
@@ -288,7 +323,34 @@ def comment(user_id, book_id, isbn, author, title, year):
         db.commit()
         return redirect(url_for('bookpage', book_id=book_id ,isbn=isbn, author=author, title=title, year=year))
     else:
-        return "It wont work because"#redirect(url_for('bookpage', book_id=book_id ,isbn=isbn, author=author, title=title, year=year))
+        return redirect(url_for('bookpage', book_id=book_id ,isbn=isbn, author=author, title=title, year=year))
+##############################################
 
+    ##########    API ACCESS    ##########
+
+#############################################
+@app.route('/api/<isbn>', methods=["GET"])
+def api(isbn):
+    key = "xNVUyD6sffGiUlSclKPAOw"
+    res = requests.get("https://www.goodreads.com/book/review_counts.json", params={"key": f"{key}", "isbns": f"{isbn}"})
+    if res.status_code != 200:
+            raise Exception("ERROR: API request unsuccessful.")
+    outerAPI = res.json()
+    jsonFile = outerAPI['books']
+    average_rating = jsonFile[0]['average_rating']
+    reviews_count = jsonFile[0]['reviews_count']
+    book = Books.query.filter(Books.isbn == f"{isbn}").first()
+
+    if book is None:
+        return jsonify({"error": "Invalid book isbn"}), 422
+    else:
+        return jsonify({
+            "title": book.title,
+            "author": book.author,
+            "year": book.year,
+            "isbn": book.isbn,
+            "review_count": reviews_count,
+            "average_score": average_rating
+    })
 if __name__ == '__main__':
     app.run()
