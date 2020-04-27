@@ -4,7 +4,6 @@ from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.orm import relationship
 from sqlalchemy.ext.declarative import declarative_base
-
 from sqlalchemy import (
     Table,
     Column,
@@ -72,5 +71,3 @@ class Messages(db.Model):
 
     def __repr__(self):
         return '<Messages %r>' % self.message
-
-
