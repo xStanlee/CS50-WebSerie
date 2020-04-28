@@ -143,7 +143,7 @@ iframe {
   font-family: Poppins-Regular;
   font-size: 13px;
   line-height: 1.4;
-  color: #7e4900;
+  color: #3a437e;
 }
 
 .txt2-lm {
@@ -157,7 +157,7 @@ iframe {
   font-family: Poppins-Regular;
   font-size: 15px;
   line-height: 1.4;
-  color: #7e4900;
+  color: #3a437e;
   text-transform: uppercase;
 }
 
@@ -353,7 +353,7 @@ input.input100 {
   top: -1px;
   left: -1px;
   pointer-events: none;
-  border: 1px solid #7e4900;
+  border: 1px solid #3a437e;
 
   visibility: hidden;
   opacity: 0;
@@ -412,7 +412,7 @@ input.input100 {
   width: 100%;
   height: 50px;
   border-radius: 3px;
-  background: #7e4900;
+  background: #3a437e;
 
   font-family: Montserrat-Bold;
   font-size: 12px;
@@ -582,7 +582,7 @@ input.input100 {
   height: 8rem;
   width: 100vw;
 
-  background-image: linear-gradient(rgba(102, 62, 3, 0.729), rgba(45, 27, 1, 0.729)), url(/static/bg-logged.jpg);
+  background-image: linear-gradient(#515c94ba, #3a437ecb), url(/static/bg-logged.jpg);
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
@@ -616,7 +616,7 @@ input.input100 {
 .nav__logo::after{
   display: block;
   content: "LOGO";
-  color: #ffb752ba;
+  color: #515c94ba;
 }
 /************************************/
 
@@ -636,17 +636,17 @@ input.input100 {
   width: 15rem;
   height: 2.5rem;
   will-change: transform;
-  background-color: #ffb752ba;
-  color: #666666;
+  background-color: #f4f6fdba;
+  color: #515c94;
   transition: all .7s;
   box-shadow: 4px -3px 25px -4px rgba(0,0,0,0.65);
 }
 .nav__search-input:focus,
 .nav_search-input:active{
   transform: scale(1.08);
-  color: #333333;
+  color: #3a437e;
   cursor: pointer;
-  background-color: #ffb752ba;
+  background-color: #c4ceffba;
 }
 /************************************/
 
@@ -677,7 +677,7 @@ input.input100 {
 .nav__logout-icon{
   width: 2.5rem;
   height: 2.5rem;
-  fill: #ffb752ba;
+  fill: #e8ebffba;
 }
 
 .nav__logout-span{
@@ -686,7 +686,7 @@ input.input100 {
   top: 2.5rem;
   left: -1.5rem;
   font-family: inherit;
-  color:#ffb752ba;
+  color:#515c94ba;
 }
 .nav__logout-username{
   margin-right: 5vw;
@@ -696,7 +696,12 @@ input.input100 {
   color: currentColor;
 }
 .content{
-  background-image: linear-gradient(rgba(255, 183, 82, 0.729), rgba(172, 122, 51, 0.729)), url(/static/bg_container.jpg);
+  background-image: linear-gradient(#ffffffed, #ffffffed), url(/static/bg_container.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  margin: 0 auto;
+  min-height: 100vh;
+  max-width: 100vw;
 
   display: grid;
   grid-template-rows: 1fr 20vh;
@@ -739,7 +744,7 @@ input.input100 {
 }
 
 .card__img{
-  background-color: #6b4c20;
+  background-color: #3a437e;
   opacity: 0.87;
 
   display: block;
@@ -760,7 +765,7 @@ input.input100 {
 }
 
 .card__like{
-  fill: #ffb752;
+  fill: #ffffffba;
   height: 2.5rem;
   width: 2.5rem;
   margin: 1.5rem 1rem 0 0;
@@ -777,7 +782,7 @@ input.input100 {
   text-align: center;
   padding: 1vw;
   padding-bottom: 1.5vh;
-  background-color: #ac7a33;
+  background-color: #515c94;
   font-weight: 400;
   z-index: 1;
   color: #fff;
@@ -791,20 +796,27 @@ input.input100 {
   z-index: 3;
   transform: translateY(60%);
 }
-
-.card__btn{
+.card__btn-holder{
   grid-column: 1/-1;
+}
+.card__btn{
+  position: relative;
+  display: block;
+  margin: 0 auto;
+  margin-bottom: 2rem;
+  padding: .2rem 2rem;
   box-shadow: 5px 5px 20px -5px rgba(0,0,0,0.75);
-  background-color: #ac7a33;
+  background-color: #515c94;
   color: #fff;
   font-size: 1.6rem;
+  text-align: center;
   text-transform: uppercase;
   will-change: background-color;
 
   transition: all .3s;
 }
 .card__btn:hover{
-  background-color: #7c5622
+  background-color: #3a437e;
 }
 .card__author,
 .card__isbn{
@@ -826,7 +838,7 @@ input.input100 {
 .card__isbn > svg,
 .card__year > svg,
 .card__score > svg {
-  fill: #ac7a33;
+  fill: #515c94;
   height: 2rem;
   width: 2rem;
   margin-right: 1.5rem;
@@ -842,7 +854,7 @@ input.input100 {
 
 /************************************/
 .bg-video {
-  background-color: #7e4900;
+  background-color: #3a437e;
   padding: 0 3rem;
   position: absolute;
   top: 0;
@@ -902,7 +914,7 @@ input.input100 {
   flex-direction: column;
 
   clip-path: polygon(0 0, 100% 28%, 75% 100%, 0 56%);
-  background-color: #7e4900;
+  background-color: #3a437e;
   opacity: .7;
 
 }
@@ -940,7 +952,7 @@ input.input100 {
   grid-column: col-start 2 / -1;
   grid-row: 1 / -1;
 
-  background-color: #7e4900;
+  background-color: #3a437e;
   opacity: .7;
   clip-path: polygon(0 75.4%, 100% 0, 100% 49%, 74% 100%);
 
