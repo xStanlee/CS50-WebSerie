@@ -25,10 +25,6 @@ from wtforms.validators import (
     Email,
     Length
 )
-from flask_session import Session
-from flask_wtf import FlaskForm
-
-
 from werkzeug.security import (
     generate_password_hash,
     check_password_hash
@@ -37,15 +33,15 @@ from sqlalchemy.orm import (
     scoped_session,
     sessionmaker
 )
-from sqlalchemy import create_engine
-
 from flask_json import (
     FlaskJSON,
     JsonError,
     json_response,
     as_json
 )
-
+from sqlalchemy import create_engine
+from flask_session import Session
+from flask_wtf import FlaskForm
 from models import *
 
 app = Flask(__name__)
@@ -82,24 +78,17 @@ Session(app)
  #Set up database & scope_session for each user
 engine = create_engine(os.getenv("DATABASE_URL"))
 db = scoped_session(sessionmaker(bind=engine))
-#//////////////////////////
-#/// FOR LATER USAGE
-
-# Request for jsonFile
-#res = requests.get("https://www.goodreads.com/book/review_counts.json", params={"key": "cIAWnULXTSoqvTIKqOMdTQ", "isbns": "9781632168146"})
-#resJson = res.json()
-
-@app.route("/")
-def empty():
-    if "user" in session:
-        return redirect(url_for('test'))
-    else:
-        return redirect(url_for('login'))
 ##############################################
 
 ##########     LOGIN ROUTE          ##########
 
 ##############################################
+@app.route("/")
+def empty():
+    if "user" in session:
+        return redirect(url_for('main'))
+    else:
+        return redirect(url_for('login'))
 @app.route("/login", methods=['POST', 'GET'])
 def login():
     DB_user = Users.query.all()
@@ -113,7 +102,7 @@ def login():
         for user in DB_user:
             if user.username == un and user.password == pw:
                 session["user_id"] = user.id
-                return redirect(url_for('test')) #MainPage
+                return redirect(url_for('main')) #MainPage
             else:
                 count += 1
                 if count < len(DB_user):
@@ -128,9 +117,9 @@ def login():
 ##########     LOGGED ROUTE         ##########
 
 ##############################################
-@app.route("/test/")
-@app.route("/test")
-def test():
+@app.route("/main/")
+@app.route("/main")
+def main():
     if "user" in session and "password" in session:
         usr = session["user"]
         return render_template('logged.html', username=usr)
@@ -149,7 +138,7 @@ def logout():
         session.pop('password', None)
         return render_template('sent.html', message=f"Come back soon... {name} we will miss You.")
     else:
-        return redirect(url_for('test'))
+        return redirect(url_for('main'))
 ##############################################
 
 ##########   REGISTRATION ROUTE     ##########
@@ -179,7 +168,7 @@ def registration():
 
         db.execute(ins, {'username': username, 'password': password, 'first_name': first_name, 'last_name': last_name, 'phone': phone, 'email': email})
         db.commit()
-        return redirect(url_for('test', usr=username, psw=hashed_password))
+        return redirect(url_for('main', usr=username, psw=hashed_password))
 
 
 
@@ -217,7 +206,7 @@ def email():
   ##########     SEARCH BOOKS    ##########
 
 ##############################################
-@app.route('/test', methods=['POST','GET'])
+@app.route('/main', methods=['POST','GET'])
 def search():
     if request.method == "POST":
         bookname = request.form["bookname"]
@@ -282,7 +271,7 @@ def search():
         else:
             return render_template('logged.html', books=value, score=average_rating_list)
     else:
-        return redirect(url_for('test'))
+        return redirect(url_for('main'))
 ##############################################
 
     ##########     BOOK PAGE    ##########
