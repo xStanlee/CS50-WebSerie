@@ -286,7 +286,6 @@ iframe {
   flex-wrap: wrap;
   padding: 40px 65px 40px 65px;
 }
-
 .login100-form-title {
   font-family: Poppins-Regular;
   font-size: 20px;
@@ -505,6 +504,17 @@ input.input100 {
   }
 }
 
+@media only screen and (max-width: 450px){
+  .login100-form{
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-top: 15px;
+  }
+  .p-b-239{
+    padding-bottom: 60px;
+  }
+}
+
 
 /*------------------------------------------------------------------
 [ Alert validate ]*/
@@ -705,7 +715,7 @@ input.input100 {
 
   display: grid;
   grid-template-rows: 1fr 20vh;
-  grid-template-columns: [start-gap] 10rem [start-end center-start] repeat(4, [col-start] minmax(min-content, 24rem) [col-end]) [center-end] minmax(10rem, 1fr);
+  grid-template-columns: [start-gap] 10rem [start-end center-start] repeat(4, [col-start] minmax(min-content, 24rem) [col-end]) [center-end] minmax(10rem, 1fr) [end-gap];
 }
 .content > *{
   padding: 4rem;
@@ -784,7 +794,6 @@ input.input100 {
   padding-bottom: 1.5vh;
   background-color: #515c94;
   font-weight: 400;
-  z-index: 1;
   color: #fff;
 
   width: 80%;
@@ -1027,4 +1036,63 @@ input.input100 {
   height: 100%;
   width: 100%;
   filter: grayscale(100%);
+}
+/***** RWD ********/
+/***** RWD ********/
+/***** RWD ********/
+
+@media only screen and (max-width: 471px){
+  .content > * {
+    padding: 1rem 1rem;
+  }
+}
+
+@media only screen and (max-width: 471px){
+  .login100-form-r{
+    width: 90%;
+  }
+  .login100-form-title{
+    font-size: 17px;
+  }
+  .nav {
+    flex-direction: column;
+    justify-content: space-around;
+  }
+  .nav__logo{
+    display: none;
+  }
+  .nav__logout{
+    order: 0;
+  }
+  .nav__search{
+    order: 1;
+    display: flex;
+    justify-self: flex-end;
+
+    order: 1;
+    margin: 0 auto;
+  }
+}
+@media only screen and (max-width: 660px){
+  .nav__logout{
+    margin-left: 2rem;
+  }
+  .nav__logo{
+    display: none;
+  }
+  .nav__search{
+    display: flex;
+    order: 999;
+    margin: 0 auto;
+  }
+  .item__holder{
+    grid-column: 1 / -1;
+    margin: 0;
+  }
+}
+@media only screen and (min-width: 1600px){
+  .card__title{
+    padding-bottom: 4vh;
+    height: 5%;
+  }
 }
