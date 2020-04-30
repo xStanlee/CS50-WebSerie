@@ -46,12 +46,7 @@
     </section>
 
     <div class="section__textarea">
-      <form action="{{ url_for('comment', user_id=user_id, book_id=book_id, isbn=isbn, author=author, title=title, year=year) }}"method="POST" class="section__textarea-item">
-        <textarea name="comment" class="section__textarea-textarea" placeholder="Let us know what you think!" maxlength="120"></textarea>
-        <input class="login100-form-btn section__textarea-input" type="submit" value="Enter"/>
-      </form>
     </div>
-
       <section class="messages">
         <div class="messages__item">
           <figure class="messages__shape">
@@ -86,6 +81,12 @@
         </ul>
       </section>
 
+      <div class="section__textarea-package">
+        <form action="{{ url_for('comment', user_id=user_id, book_id=book_id, isbn=isbn, author=author, title=title, year=year) }}"method="POST" class="section__textarea-item">
+          <textarea class="section__textarea-textarea" name="comment" rows="5" cols="33" minlength="30" maxlength="120" placeholder="Let us know what you think!"></textarea>
+          <input class="login100-form-btn section__textarea-input" type="submit" value="Enter"/>
+        </form>
+      </div>
 
       <!--####################### GENERATE REVIEW ####################################-->
   </section>
