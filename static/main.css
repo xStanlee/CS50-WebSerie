@@ -30,6 +30,15 @@
   src: url('../fonts/montserrat/Montserrat-Bold.ttf');
 }
 
+@keyframes move {
+  from {
+    offset-distance: 0%;
+  }
+
+  to {
+    offset-distance: 100%;
+  }
+}
 
 /*//////////////////////////////////////////////////////////////////
 [ RESTYLE TAG ]*/
@@ -424,6 +433,10 @@ input.input100 {
   -o-transition: all 0.4s;
   -moz-transition: all 0.4s;
   transition: all 0.4s;
+}
+.login100-form-btn-page{
+  width: 30%;
+  margin: 0 auto 3vh 15vw;
 }
 
 .login100-form-btn-lm {
@@ -902,14 +915,14 @@ input.input100 {
 .book_details{
   padding: 3rem;
   width: 25vw;
-  height: 30vh;
+  height: 40vh;
 
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
   flex-direction: column;
 
-  clip-path: polygon(0 0, 100% 28%, 75% 100%, 0 56%);
+  clip-path: polygon(77% 0, 100% 56%, 80% 100%, 0 100%, 0 0);
   background-color: #3a437e;
   opacity: .7;
 
@@ -955,25 +968,23 @@ input.input100 {
   display: flex;
 }
 .section__textarea-item{
-  width: inherit;
-  height: inherit;
+  width: 100%;
+  height: min-content;
+
   display: flex;
-  flex-direction: row;
-  margin: 0 auto 8vh auto;
-  justify-content: flex-end;
-  align-items: flex-end;
-  z-index: 20;
+
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 .section__textarea-textarea{
-  position: absolute;
-  z-index: 21;
-  width: 30%;
-  height: 15%;
+  z-index: 2;
+  width: 40%;
+  height: 20%;
   padding: .8rem;
   font-size: 1.2rem;
   color: #000;
-  margin-left: 10vw;
-  margin-bottom: 2vh;
+  margin: 8vh auto 7vh 10vw;
 
   box-shadow: 4px -3px 25px -4px rgba(0,0,0,0.65);
   border-radius: .5rem;
@@ -983,6 +994,7 @@ input.input100 {
   justify-self: flex-end;
   align-self: flex-end;
   z-index: 40;
+  background-color: black;
 }
 
 .messages{
@@ -1024,6 +1036,16 @@ input.input100 {
   width: 100%;
   filter: grayscale(100%);
 }
+
+.footer{
+  background-color:#3a437e;
+  opacity: .7;
+  clip-path: polygon(80% 0, 100% 19%, 100% 100%, 0 100%, 0 0);
+  min-width: min-content;
+  min-height: min-content;
+  margin: -1px auto 0 auto;
+}
+
 /***** RWD ********/
 /***** RWD ********/
 /***** RWD ********/
@@ -1130,7 +1152,12 @@ input.input100 {
  /********* PAGE *********/
 /*************************/
 
-@media only screen and (min-width: 360px) and (max-width: 609px){
+@media only screen and (min-width: 360px) and (max-width: 606px){
+  .section-page{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
   .section-page > *{
     transform: scale(0.8);
   }
@@ -1147,7 +1174,9 @@ input.input100 {
   }
   .book,
   .messages{
+    margin-top: -15vh;
     grid-column: 1/-1;
+    grid-row: row-start 1/ row-end 2;
   }
   .book{
     grid-row: row-start 1/ row-end 2;
@@ -1157,11 +1186,8 @@ input.input100 {
   }
   .book__img{
     padding: 0;
-  }
-  .book__img{
     padding-top: 3rem;
   }
-
   .book_details{
     width: 100%;
     height: 80vh;
@@ -1173,7 +1199,9 @@ input.input100 {
   .book_details > :first-child{
     margin-left: 12%;
   }
-
+  .messages{
+    height: min-content;
+  }
   .messages__item{
     width: 80%;
     max-height: 25%;
@@ -1184,30 +1212,58 @@ input.input100 {
   }
 
   .section__textarea{
-    clip-path: polygon(0 100%, 100% 0, 100% 49%, 100% 100%);
+    display: none;
   }
   .section__textarea-textarea{
-    width: 68%;
-    height: 28%;
+    width: 80%;
+    height: 80%;
+    margin: 5vh auto 5vh auto;
   }
   .section__textarea-package{
     grid-column: col-start 2/ col-end 3;
     grid-row: row-start 4/ row-end 4;
     align-self: end;
   }
+  .footer{
+    margin: -5vh auto;
+    clip-path: polygon(20% 0%, 80% 0%, 100% 20%, 100% 80%, 80% 100%, 20% 100%, 0% 80%, 0% 20%);
+  }
+
+ /* BUBBLES */
+ /*#########*/
+  .offsetElement {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: #3a437e;
+    animation: move 3s linear infinite;
+  }
+  #offsetElement__1{
+    offset: path("M 50 50 L 300 100 L 200 300 z") auto;
+  }
+  #offsetElement__2{
+    offset: path("M 400 100 L 100 100 L 100 100 z") auto;
+  }
+  #offsetElement__3{
+    offset: path("M 300 0 L 100 200 L 200 100 z") auto;
+  }
+  #offsetElement__4{
+    offset: path("M 1000 0 L -300 -300 L 0 0 ") auto;
+  }
+  #offsetElement__5{
+    offset: path("M 700 -370 L -300 -300 L 0 0 z") auto;
+  }
+
   /* DISPLAYED ELEMENTS */
   /*####################*/
   /*####################*/
   .bg-video{
     display: none;
   }
-  .section__textarea{
-    display: none;
-  }
 }
 
 
-@media only screen and (min-width: 610px) and (max-width: 1100px){
+@media only screen and (min-width: 608px) and (max-width: 1100px){
   .book,
   .messages{
     grid-column: 1/-1;
@@ -1242,7 +1298,8 @@ input.input100 {
     clip-path: polygon(0 100%, 100% 0, 100% 49%, 100% 100%);
   }
   .section__textarea-textarea{
-    width: 68%;
+    margin: 5vh auto 5vh auto;
+    width: 58%;
     height: 28%;
   }
   .section__textarea-package{
@@ -1251,6 +1308,40 @@ input.input100 {
     align-self: end;
   }
   .messages__ul:last-child{
-    margin-bottom: 15rem;
+    margin-bottom: 25rem;
+  }
+  .login100-form-btn{
+    margin: 3vh auto 2vh auto;
+    width: 58%;
+    background-color: #0f1646;
+  }
+  .footer{
+    background-color:#3a437e;
+    opacity: .7;
+    clip-path: polygon(25% 0, 100% 0, 79% 100%, 0 100%, 0 19%);
+    min-width: min-content;
+    min-height: min-content;
+    margin: 0 auto;
+  }
+}
+@media only screen and (min-width: 1101px){
+  .footer{
+    will-change: animation;
+  }
+  .offsetElement-big{
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: rgb(0, 0, 0);
+    animation: move 6s linear infinite;
+  }
+  #offsetElement__6{
+    offset: path("M 1400 -410 L -300 -300 L 0 0 z") auto;
+  }
+  #offsetElement__7{
+    offset: path("M 0 0 L 0 0 L 2180 0 z") auto;
+  }
+  #offsetElement__8{
+    offset: path("M 450 -500 L 0 -500 L 2180 0 z") auto;
   }
 }

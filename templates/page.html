@@ -8,9 +8,16 @@
       Your browser is not supported!
     </video>
 </div>
+
+<div class="bubbles">
+  <div class="offsetElement" id="offsetElement__1"></div>
+  <div class="offsetElement" id="offsetElement__2"></div>
+  <div class="offsetElement" id="offsetElement__3"></div>
+</div>
+
 <section class="section-page">
     <section class="book">
-      <div class="text-center margin-bottom-8r">
+      <div class="text-center margin-bottom-2r">
         <h2 class="heading-secondary card__btn-cheat card__btn">
           TITLE : {{ title }}  </br>
         </h2>
@@ -80,14 +87,23 @@
           {% endfor %}
         </ul>
       </section>
-
-      <div class="section__textarea-package">
-        <form action="{{ url_for('comment', user_id=user_id, book_id=book_id, isbn=isbn, author=author, title=title, year=year) }}"method="POST" class="section__textarea-item">
-          <textarea class="section__textarea-textarea" name="comment" rows="5" cols="33" minlength="30" maxlength="120" placeholder="Let us know what you think!"></textarea>
-          <input class="login100-form-btn section__textarea-input" type="submit" value="Enter"/>
-        </form>
+      <div class="bubbles">
+        <div class="offsetElement" id="offsetElement__4"></div>
+        <div class="offsetElement" id="offsetElement__5"></div>
       </div>
-
       <!--####################### GENERATE REVIEW ####################################-->
   </section>
+  <footer class="footer">
+    <div class="section__textarea-package">
+      <form action="{{ url_for('comment', user_id=user_id, book_id=book_id, isbn=isbn, author=author, title=title, year=year) }}"method="POST" class="section__textarea-item">
+        <textarea class="section__textarea-textarea" name="comment" rows="5" cols="33" minlength="30" maxlength="120" placeholder="Let us know what you think!"></textarea>
+        <input class="login100-form-btn login100-form-btn-page section__textarea-input" type="submit" value="Enter"/>
+      </form>
+      <div class="bubbles">
+        <div class="offsetElement-big" id="offsetElement__6"></div>
+        <div class="offsetElement-big" id="offsetElement__7"></div>
+        <div class="offsetElement-big" id="offsetElement__8"></div>
+      </div>
+    </div>
+  </footer>
 {% endblock %}
