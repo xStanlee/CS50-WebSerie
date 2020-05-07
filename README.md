@@ -10,7 +10,12 @@
 URL : https://nowaapka1.herokuapp.com/
 
     Usage: 
-    Go to register page. Make your own account. Log in to the browser part and check for a book.                    
+    Go to register page. Make your own account. Log in to the browser part and check for a book. 
+    You can use example logs:
+    
+    login: Example
+    password: example12
+    
     Go to the bookpage by clicking on view book btn. and your review of a book go into dicussion with
     other users.
     You can search book by using only Author name or only ISBN( id ) or using partial name of book.
