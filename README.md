@@ -1,11 +1,34 @@
-Project 1: Books
-Objectives
+# Project 1: Books                      
+## Objectives
 
     Become more comfortable with Python.
-    Gain experience with Flask.
+    Gain experience with Flask.                      
     Learn to use SQL to interact with databases.
+    
+## Deploy on Heroku(not connected repository to Github. Pushed to git. heroku):
 
-Overview
+URL : https://nowaapka1.herokuapp.com/
+
+    Usage: 
+    Go to register page. Make your own account. Log in to the browser part and check for a book.                    
+    Go to the bookpage by clicking on view book btn. and your review of a book go into dicussion with
+    other users.
+    You can search book by using only Author name or only ISBN( id ) or using partial name of book.
+    
+    For example at main page when you're logged.
+    Put to the searchbar "mel" as a book. You'll recive all books with mel in title.
+    
+    You can get JSON file for your own purpouse from my API which is combine of DATABASE and outer API
+    from great page ( Goodreads.com ) by typing in url:  https://nowaapka1.herokuapp.com/api/<isbn>
+    where isbn is our book id located on each booksite. 
+    
+    Example : https://nowaapka1.herokuapp.com/api/0694011479
+    
+    Please, leave your addvices on that page as a comment : 
+    https://nowaapka1.herokuapp.com/book/217/0340896965/David%20Nicholls/One%20Day/2009
+
+
+## Overview
 
 In this project, you’ll build a book review website. Users will be able to register for your website and then log in using their username and password. Once they log in, they will be able to search for books, leave reviews for individual books, and see the reviews made by other people. You’ll also use the a third-party API by Goodreads, another book review website, to pull in ratings from a broader audience. Finally, users will be able to query for book details and book reviews programmatically via your website’s API.
 Getting Started
